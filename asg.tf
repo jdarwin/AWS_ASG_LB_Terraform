@@ -7,7 +7,8 @@ resource "aws_autoscaling_group" "web" {
   load_balancers = [
     aws_elb.web_elb.id
   ]
-  launch_configuration = [
+  launch_configuration = aws_launch_configuration.web.name
+  enabled_metrics = [
     "GroupMinSize",
     "GroupMaxSize",
     "GroupDesiredCapacity",
@@ -25,6 +26,6 @@ resource "aws_autoscaling_group" "web" {
   tag {
     key                 = "Name"
     value               = "web"
-    propogate_at_launch = true
+    propagate_at_launch = true
   }
 }

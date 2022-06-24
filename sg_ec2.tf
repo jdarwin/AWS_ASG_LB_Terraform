@@ -18,11 +18,17 @@ resource "aws_security_group" "demosg1" {
     protocol    = "tcp"
     to_port     = 443
   }
-  # outbound rules
-  egress {
+  ingress {
     from_port   = 22
     to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # outbound rules
+  egress {
+    from_port   = 0
+    to_port     = 0
     protocol    = "-1"
-    cidr_blocks = "[0.0.0.0/0]"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
